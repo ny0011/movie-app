@@ -36,3 +36,22 @@ ReactDOM.render(<App />, document.getElementById("potato"));
 6. App.js안에 Potato()함수를 사용해보자
 7. import Potato from "./Potato"를 App.js로 가져오고 h1 태그 밑에 <Potato /> 라고 써본다
 8. 웹페이지를 실행하면 Potato() 함수가 실행되었다..!
+
+**Reusable Components with JSX + Props**
+
+1. component로 html 문서를 작성할 수 있다
+2. component에 정보를 보낼 수 있다. -> 동적으로 재사용할 수 있는 component를 사용할 수 있음!
+
+- App()에서 Food()로 인자를 전달하는 방법
+
+1. App()함수에서 Food()를 호출할 때 다음처럼 작성함
+   : <Food fav="kimchi" />
+
+- <div class="kimchi"></div> 같은 형식으로 fav라는 property(특성)에 kimchi라는 value(값)로 인자 전달함
+- 값은 {true}, {["hello",1,2,3,4,true]} bool값, Array값 등으로 여러가지 종류를 가질 수 있음
+- property를 여러개로 줘도 Food()에서는 한 개의 인자에서 property를 Object형태로 모두 가져옴
+
+2. Food()에서 fav prop만 가져오도록 할 때 : prop.fav 라고 해도 되지만 ES6 버전에서는 {fav}로 인자 설정을 해도 됨
+   -> Food({fav})
+3. Food({fav})의 태그 내부에서 fav 변수 값을 사용할 때 : {fav} 라고 쓰면 됨.
+4. Food(prop) -> {prop.fav}, Food({fav}) -> {fav}
