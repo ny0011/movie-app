@@ -37,7 +37,7 @@ ReactDOM.render(<App />, document.getElementById("potato"));
 7. import Potato from "./Potato"를 App.js로 가져오고 h1 태그 밑에 <Potato /> 라고 써본다
 8. 웹페이지를 실행하면 Potato() 함수가 실행되었다..!
 
-**Reusable Components with JSX + Props**
+**2.1 Reusable Components with JSX + Props**
 
 1. component로 html 문서를 작성할 수 있다
 2. component에 정보를 보낼 수 있다. -> 동적으로 재사용할 수 있는 component를 사용할 수 있음!
@@ -55,3 +55,48 @@ ReactDOM.render(<App />, document.getElementById("potato"));
    -> Food({fav})
 3. Food({fav})의 태그 내부에서 fav 변수 값을 사용할 때 : {fav} 라고 쓰면 됨.
 4. Food(prop) -> {prop.fav}, Food({fav}) -> {fav}
+
+**2.2 Dynamic Component Generation**
+웹사이트에 동적 데이터를 추가해보자(API에서 받은 데이터를 웹사이트에 출력해본다)
+
+1. 데이터를 받는다
+
+- foodLike, food들의 object 배열을 만든다(JSON 형식으로 받아온 데이터를 저장한 배열 같음)
+
+2. 함수를 만들자
+
+- map 함수(javascript 문법) : https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+- map함수로 받아온 데이터를 추출한다
+  return = array.map(function(element){
+  return element + "ssssS"
+  })
+
+```
+friends = ["aa","bb","Cc","dd"]
+결과 = friends.map(배열의 원소 => {
+    console.log(원소); // 데이터 처리
+    return 원소; // 처리한 데이터를 리턴하면 그 데이터를 배열로 만들어서 결과 변수에 리턴함
+})
+```
+
+- App() 함수에서 받아온 데이터 배열을 map함수로 처리한다. 태그 안에서 자바 스크립트 문법을 사용하려면 {} 괄호 안에서 쓰면 됨.
+- 데이터 배열의 오브젝트 dish를 Food() 함수의 인자로 보낼 때 dish 변수의 요소들을 보낼 수 있다. foodLike 배열이 key-value 형식이니까 dish.name, dish.image로 표현해서 각 요소의 값을 보냄.
+
+```
+{foodILike.map(dish => (
+        <Food name={dish.name} picture={dish.image} />
+      ))}
+```
+
+- Food() 함수의 인자는 App()에서 보낸 name, picture과 이름이 같게 해서 함수 내에서 사용함.
+
+```
+function Food({ name, picture }) {
+  return (
+    <div>
+      <h3>I like {name}</h3>
+      <img src={picture} alt="" />
+    </div>
+  )
+```
