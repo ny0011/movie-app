@@ -81,7 +81,7 @@ friends = ["aa","bb","Cc","dd"]
 ```
 
 - App() 함수에서 받아온 데이터 배열을 map함수로 처리한다. 태그 안에서 자바 스크립트 문법을 사용하려면 {} 괄호 안에서 쓰면 됨.
-- 데이터 배열의 오브젝트 dish를 Food() 함수의 인자로 보낼 때 dish 변수의 요소들을 보낼 수 있다. foodLike 배열이 key-value 형식이니까 dish.name, dish.image로 표현해서 각 요소의 값을 보냄.
+- 데이터 배열의 오브젝트 dish를 Food() 함수의 인자로 보낼 때 dish 변수의 요소들을 보낼 수 있다. foodILike 배열이 key-value 형식이니까 dish.name, dish.image로 표현해서 각 요소의 값을 보냄.
 
 ```
 {foodILike.map(dish => (
@@ -90,6 +90,8 @@ friends = ["aa","bb","Cc","dd"]
 ```
 
 - Food() 함수의 인자는 App()에서 보낸 name, picture과 이름이 같게 해서 함수 내에서 사용함.
+- img src 옆에 alt prop은 장님을 위해 설명글을 써달라는 prop. warning msg가 떠서 수정한건데 이 msg는 create-react-app 가 알려주는 것임.
+- https://stackoverflow.com/questions/43812733/what-does-this-warning-message-mean-img-elements-must-have-an-alt-prop-either
 
 ```
 function Food({ name, picture }) {
@@ -99,4 +101,23 @@ function Food({ name, picture }) {
       <img src={picture} alt="" />
     </div>
   )
+```
+
+- {console.log(foodILike.map(renderFood))} 로 map이 반환하는 값이 Array임을 확인할 수 있다.
+- warning msg 발생. <Food />에서 warning 발생함. 생성된 Array의 원소들은 고유 키 값을 가져야 함(?) -> map함수를 사용할 때 발생하는 메시지 같음..
+- map으로 태그의 리스트를 생성할 때 key값을 고유값으로 직접 지정해줘야 하나봄
+- https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js/43892905#43892905
+- map으로 새로운 배열을 만들면 unique key prop가 사라지나봄..
+  -> data array인 foodILike에 id property를 추가해주자
+
+```
+Warning: Each child in a list should have a unique "key" prop.
+
+```
+
+- 데이터 배열에 추가한 id를 Food함수를 부르는 곳에서 key값에 넣어준다
+- key는 Food()함수로 넘기지 않음. react 내부에서 사용하는 key prop인가봄..
+
+```
+return <Food key={dish.id} name={dish.name} picture={dish.image} />;
 ```
