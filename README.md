@@ -192,6 +192,7 @@ state = {
 ```
 
 - state안의 변수를 어떻게 바꿀까? class 내부 함수를 사용해보자
+  https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/%EC%95%A0%EB%A1%9C%EC%9A%B0_%ED%8E%91%EC%85%98
 
 ```
 add = () => {}; // javascript임. react아님.
@@ -202,4 +203,37 @@ add = () => {}; // javascript임. react아님.
 
 ```
 <button onClick={this.add}>sfdfs</button>
+```
+
+**3.1 All you need to know about State**
+
+- 클래스 내부 함수에서 직접 state변수를 바꾸려고 하면 에러가 발생한다
+- state를 변경하고 있지만 state가 동작하지 않음.
+- 내부 함수에서 state변수를 변경하면 react는 render() 함수를 재실행하지 않기 때문! -> 그래서 state변수가 바뀐 것을 확인 할 수 없음.
+- 즉 state의 값이 변경될 때마다 react가 render()를 호출해서 html에서 보여주는 state값을 바꿔주길 바람.
+- 만약 setState() 함수를 호출하면 react가 알아서 view(render())를 새로고침 해줌.
+
+```
+this.status.count = 1;
+
+ERROR:
+ Do not mutate state directly. Use setState()  react/no-direct-mutation-state
+```
+
+- this.setState() 로 호출한다.
+- **state는 object다** -> setState() 안에 새 state object를 설정한다
+- count : 1 이면 count = 1 과 같음.
+- react는 버튼이 눌렸을 때 그 버튼이 바꾸는 state부분만 다시 render해서 새로 보여준다.
+- count : this.state.count + 1 은 count = this.state.count + 1로 현재 count값에서 + 1 하는 것과 같음.
+- 하지만 아래 코드는 좋은 코드가 아님.
+- 왜냐면 state와 관련된 접근이 아니라 객체에 직접 접근(this)해서 state 값을 가져오기 때문에 성능 문제가 있음(?)
+- setState() 안에서 현재 state변수를 가져오는 방식을 사용한다.
+- current => ({}) 로 state변수를 current 이름으로 가져온다.
+
+```
+* bad
+this.setState({count : this.state.count + 1});
+
+* good
+this.setState(current => ({count : current.count + 1}));
 ```
