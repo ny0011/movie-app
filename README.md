@@ -237,3 +237,28 @@ this.setState({count : this.state.count + 1});
 * good
 this.setState(current => ({count : current.count + 1}));
 ```
+
+**3.2 Component Life Cycle**
+http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+- render() 함수 외에 React.Component내장함수를 알아보자
+- _mount_ : DOM으로 인스턴스가 생성되거나 삽입될 때 아래 메소드가 불려짐
+
+1. constructor() : *javascript*에서 class를 만들 때 호출 됨. constructor()가 먼저 호출되고 render()가 호출됨
+
+- component가 mount될 때, screen에 표시될 때, component가 내 웹사이트에 갈 때 호출됨
+
+2. render()
+3. componentDidMount() : component가 render된 이후에 실행하는 함수
+
+- _update_ : state를 변경할 때 (ex add 버튼을 눌러서 state변경할 때)
+
+1. static getDerivedStateFromProps()
+2. shouldComponentUpdate() : 기본적으로 업데이트를 할지 말지 결정
+3. render()
+4. getSnapshotBeforeUpdate() : 잘 안씀
+5. componentDidUpdate() : component의 state가 변경된 다음에 실행되는 함수
+
+- _unmount_ : component가 죽을 때(다른 페이지로 넘어갈 때, state를 사용해서 component를 교체할 때 등) 실행
+
+1. componentWillUnmount : 다른 웹페이지로 이동하거나 새로고침하거나 웹페이지를 닫을 때 호출됨
