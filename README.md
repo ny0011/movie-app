@@ -284,3 +284,37 @@ http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 * state 변수에서 특정 변수를 정의하지 않고 setState()에서 특정 변수를 정의하면 안됨?
 
 - 됨! state 변수에 정의해두는 것은 미리 정의하는 것임.
+
+**4.0 Fetching Movies from API**
+
+- fetch()로 API를 가져와도 되지만 axios를 사용해보자
+- YTS API를 사용할 것임.
+- nomad coder에서 만든 json파일을 보자 : https://yts-proxy.now.sh/list_movies.json
+
+```
+npm i axios
+```
+
+- axios를 import하고 서버의 json파일에서 정보를 get
+
+```
+componentDidMount() {
+    axios.get("https://yts-proxy.now.sh/list_movies.json");
+  }
+```
+
+- 정보를 얻고있는지 확인하는 방법은 chrome debug모드에서 Network 탭을 보면 됨.
+- axios.get()은 항상 빠르지 않기 때문에 javascript에게 componentDidMount 함수가 끝나려면 시간이 좀 필요하다고 말해야 함.
+- 1. async componentDidMount라고 선언하기
+- 2. 함수를 새로 만들기
+     -> 2)로 해본다
+- getMovies() 함수에서 axios.get()을 실행하고 javascript에게 getMovie()가 끝나려면 시간이 걸린다고 얘기해야 함.
+- 1. 함수를 async로 정의한다
+- 2. axios.get() 앞에 await이라고 써준다.
+- 3. 그러면 javascript는 axios가 끝날때까지 기다려줌.
+
+```
+getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+  };
+```
