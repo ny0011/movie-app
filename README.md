@@ -262,3 +262,25 @@ http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 - _unmount_ : component가 죽을 때(다른 페이지로 넘어갈 때, state를 사용해서 component를 교체할 때 등) 실행
 
 1. componentWillUnmount : 다른 웹페이지로 이동하거나 새로고침하거나 웹페이지를 닫을 때 호출됨
+
+**3.3 Planning the Movie Component**
+
+1. isLoading : app이 mount(생성)될 때 true값. 기본적으로 true.
+
+- state변수에 isLoading을 선언해두면 render()에서 참고할 때 this.state.isLoading으로 불러오면 됨.
+  -> 이 방법 대신에 const {isLoading} = this.state; 로 불러온다
+  https://stackoverflow.com/questions/51012674/reactjs-why-use-const-this-props-and-why-put-it-inside-the-render-function
+
+2. mount될 때 render() 실행한 다음 실행되는 함수 : componentDidMount
+
+- mount되고 render된 후에 3초 뒤에 isLoading변수를 false로 바꾼다
+- timeout은 js code!
+
+3. componentDidMount에서 할 일
+
+- 페이지가 로딩 되는 동안 data를 fetch한다
+- API로부터 data를 다 가져왔으면(fetch) map을 만들고 movie를 render할 것임.
+
+* state 변수에서 특정 변수를 정의하지 않고 setState()에서 특정 변수를 정의하면 안됨?
+
+- 됨! state 변수에 정의해두는 것은 미리 정의하는 것임.
