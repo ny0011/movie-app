@@ -338,3 +338,23 @@ this.setState({movies})
 - App.js에서는 데이터를 받고 Movie.js에서는 데이터를 보여줄 것임
 - 상태가 변하지 않는 Movie.js에는 class를 안쓰고 function만 써도 됨.
 - App을 render할 때 this.state에서 movies도 같이 가져오면 변수가 길어지지 않음
+
+**4.3 Adding Genres**
+
+- genres 데이터를 추가로 표시해보자
+- tag의 class를 정할 때 warning 발생함 -> javascript 코드 안에서 html을 선언해서 react가 혼란스러워 함. class라고만 하면 class App React.Component할 때의 class와 헷갈림. className으로 써주자
+
+```
+Warning: Invalid DOM property `class`. Did you mean `className`?
+```
+
+- ul밑에 li로 genre 여러개가 들어가도로 할 것임.
+- genres.map을 이용한다. key가 없으면 에러가 발생하는데 map의 두번째 인자가 배열의 index라서 그걸 넘겨주면 됨.
+
+```
+{genres.map((genre, index) => (
+            <li className="genres__genre" key={index}>
+              {genre}
+            </li>
+          ))}
+```
