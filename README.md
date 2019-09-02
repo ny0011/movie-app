@@ -318,3 +318,23 @@ getMovies = async () => {
     const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
   };
 ```
+
+**4.1 Rendering the Movies**
+
+- 데이터를 얻을 때 movies.data.data.movies 로 json에 접근해야 하는데 ES6에서는 쉬운 방식이 있다!
+- 아래처럼 object 맨 안쪽에 있는 movies가 실제 변수 이름임.
+- 그리고 변수명과 object의 key가 될 부분의 이름이 같다면 하나만 써도 됨.
+
+```
+const {
+      data: {
+        data: { movies }
+      }
+}
+
+this.setState({movies})
+```
+
+- App.js에서는 데이터를 받고 Movie.js에서는 데이터를 보여줄 것임
+- 상태가 변하지 않는 Movie.js에는 class를 안쓰고 function만 써도 됨.
+- App을 render할 때 this.state에서 movies도 같이 가져오면 변수가 길어지지 않음
