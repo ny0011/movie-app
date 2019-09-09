@@ -358,3 +358,7 @@ Warning: Invalid DOM property `class`. Did you mean `className`?
             </li>
           ))}
 ```
+
+**4.5 Cutting the summary**
+- 줄거리 요약 길이를 정해보자
+- 문자열.slice(시작, 끝) 이렇게 하면 시작점부터 끝점까지의 문자열을 리턴함
